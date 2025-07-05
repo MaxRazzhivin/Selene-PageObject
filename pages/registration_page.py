@@ -8,7 +8,7 @@ class RegistrationPage:
         self.path_to_image = os.path.abspath("../resources/picta.png")
 
     def open(self):
-        browser.open('/')
+        browser.open('/automation-practice-form')
 
         # Удаляем рекламу
         browser.driver.execute_script("$('#RightSide_Advertisement').remove()")
@@ -34,7 +34,7 @@ class RegistrationPage:
         browser.element('#dateOfBirth').click()
         browser.element('.react-datepicker__month-select').type(month)
         browser.element('.react-datepicker__year-select').type(year)
-        browser.element(f'.react-datepicker__day--0{day}').click()
+        browser.element(f'.react-datepicker__day--0{day}:not(.react-datepicker__day--outside-month)').click()
 
     def fill_subjects(self, value):
         browser.element('#subjectsInput').type(value).press_tab()
@@ -50,10 +50,15 @@ class RegistrationPage:
         browser.element('#currentAddress').click().type(value)
 
     def fill_state(self, value):
+        # Добавил скролл для маленьких экранов до элемента
+        browser.element('#state').perform(command.js.scroll_into_view)
         browser.element('#state').click().element(by.text(value)).click()
 
     def fill_city(self, value):
         browser.element('#city').click().element(by.text(value)).click()
+
+    def submit(self):
+        browser.element('#submit').perform(command.js.click)
 
     def should_registered_user_with(self, full_name, email, gender, mobile, date_of_birth, subject, hobbies, image_name, address,
                                     state_city):
@@ -73,12 +78,5 @@ class RegistrationPage:
 
     def button_close_should_be_clickable(self):
         browser.element('#closeLargeModal').should(be.clickable)
-
-    def submit(self):
-        browser.element('#submit').perform(command.js.click)
-
-
-
-
 
 

@@ -2,9 +2,11 @@ from pages.registration_page import RegistrationPage
 
 
 def test_complete_do():
+    # GIVEN:
     registration_page = RegistrationPage()
     registration_page.open()
 
+    # WHEN
     registration_page.fill_first_name('Max')
     registration_page.fill_last_name('Razzhivin')
     registration_page.fill_email('max.nvo06@gmail.com')
@@ -31,7 +33,7 @@ def test_complete_do():
 
     registration_page.submit()
 
-
+    # THEN
     registration_page.should_registered_user_with("Max Razzhivin",
             "max.nvo06@gmail.com",
             'Male',
