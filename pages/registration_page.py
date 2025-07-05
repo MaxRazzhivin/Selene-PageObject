@@ -1,22 +1,29 @@
 import os
+import sys
+
 from selene.support.shared import browser
 from selene import have, by, be, command
+from selenium.webdriver import Keys
 
 
 class RegistrationPage:
     def __init__(self):
         self.path_to_image = os.path.abspath("../resources/picta.png")
+        self.date_of_birth_field = browser.element('#dateOfBirthInput')
+        self.all_hobbies_field = browser.all('.custom-checkbox')
+        self.state_field = browser.element('#state')
 
     def open(self):
         browser.open('/automation-practice-form')
 
         # Удаляем рекламу
-        browser.driver.execute_script("$('#cto_banner_content').remove()")
-        browser.driver.execute_script("$('#RightSide_Advertisement').remove()")
-        browser.driver.execute_script("$('#fixedban').remove()")
-        browser.driver.execute_script("$('footer').remove()")
 
-
+        browser.driver.execute_script("""
+            $('[id*=google_ads_iframe]').remove()
+            $('#RightSide_Advertisement').remove();
+            $('#fixedban').remove();
+            $('footer').remove();
+        """)
 
     def fill_first_name(self, value):
         browser.element('#firstName').type(value)
@@ -34,17 +41,23 @@ class RegistrationPage:
         browser.element('#userNumber').type(value)
 
     def fill_date_of_birth(self, year, month, day):
-        browser.element('#dateOfBirth').click()
-        browser.element('.react-datepicker__month-select').type(month)
-        browser.element('.react-datepicker__year-select').type(year)
-        browser.element(f'.react-datepicker__day--0{day}:not(.react-datepicker__day--outside-month)').click()
+        # browser.element('#dateOfBirth').click()
+        # browser.element('.react-datepicker__month-select').type(month)
+        # browser.element('.react-datepicker__year-select').type(year)
+        # browser.element(f'.react-datepicker__day--0{day}').click()
+
+        # На случай когда дата закешировалась и уже введена до нас другая
+
+        self.date_of_birth_field.send_keys(
+            Keys.COMMAND if sys.platform == 'darwin' else Keys.CONTROL, 'a', Keys.DELETE
+        ).type(f'{day}{month}{year}').press_enter()
 
     def fill_subjects(self, value):
         browser.element('#subjectsInput').type(value).press_tab()
 
     def fill_hobbies(self, value1, value2):
-        browser.all('.custom-checkbox').element_by(have.exact_text(value1)).click()
-        browser.all('.custom-checkbox').element_by(have.exact_text(value2)).click()
+        self.all_hobbies_field.element_by(have.exact_text(value1)).click()
+        self.all_hobbies_field.element_by(have.exact_text(value2)).click()
 
     def fill_image(self):
         browser.element('#uploadPicture').send_keys(self.path_to_image)
@@ -54,8 +67,8 @@ class RegistrationPage:
 
     def fill_state(self, value):
         # Добавил скролл для маленьких экранов до элемента
-        browser.element('#state').perform(command.js.scroll_into_view)
-        browser.element('#state').click().element(by.text(value)).click()
+        self.state_field.perform(command.js.scroll_into_view)
+        self.state_field.click().element(by.text(value)).click()
 
     def fill_city(self, value):
         browser.element('#city').click().element(by.text(value)).click()
