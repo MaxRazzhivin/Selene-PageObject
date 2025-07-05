@@ -11,9 +11,12 @@ class RegistrationPage:
         browser.open('/automation-practice-form')
 
         # Удаляем рекламу
+        browser.driver.execute_script("$('#cto_banner_content').remove()")
         browser.driver.execute_script("$('#RightSide_Advertisement').remove()")
         browser.driver.execute_script("$('#fixedban').remove()")
         browser.driver.execute_script("$('footer').remove()")
+
+
 
     def fill_first_name(self, value):
         browser.element('#firstName').type(value)
