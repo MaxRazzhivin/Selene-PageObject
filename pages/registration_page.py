@@ -55,20 +55,16 @@ class RegistrationPage:
 
         for attempt in range(3):
             self.date_of_birth_field.click()
-            time.sleep(0.3)
 
             # Принудительно стереть поле через JS
             browser.driver.execute_script("arguments[0].value = '';",
                                           self.date_of_birth_field())
-            time.sleep(0.2)
 
             # Отправить DELETE на всякий случай
             self.date_of_birth_field.send_keys(modifier, 'a', Keys.DELETE)
-            time.sleep(0.2)
 
             # Ввести дату
             self.date_of_birth_field.type(expected_value).press_enter()
-            time.sleep(0.5)
 
             # Проверка
             try:
@@ -78,7 +74,6 @@ class RegistrationPage:
                 if attempt == 2:
                     raise AssertionError(
                         f"Дата не установлена как '{expected_value}'")
-                time.sleep(0.5)
 
     def fill_subjects(self, value):
         browser.element('#subjectsInput').type(value).press_enter()
@@ -108,16 +103,16 @@ class RegistrationPage:
                                     state_city):
         browser.element(".table").all('td').even.should(
             have.exact_texts(
-                "Max Razzhivin",
-                "max.nvo06@gmail.com",
-                'Male',
-                '9094618666',
-                '06 April,1989',
-                'Computer Science',
-                'Sports, Reading',
-                'picta.png',
-                'somewhere in galaxy',
-                'NCR Delhi',
+                full_name,
+                email,
+                gender,
+                mobile,
+                date_of_birth,
+                subject,
+                hobbies,
+                image_name,
+                address,
+                state_city,
         ))
 
     def button_close_should_be_clickable(self):
