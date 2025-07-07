@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 
 from selene.support.shared import browser
 from selene import have, by, be, command
@@ -48,12 +49,39 @@ class RegistrationPage:
 
         # На случай когда дата закешировалась и уже введена до нас другая
 
-        self.date_of_birth_field.send_keys(
-            Keys.COMMAND if sys.platform == 'darwin' else Keys.CONTROL, 'a', Keys.DELETE
-        ).type(f'{day}{month}{year}').press_enter()
+        expected_value = f'{day} {month} {year}'
+        is_mac = sys.platform == 'darwin'
+        modifier = Keys.COMMAND if is_mac else Keys.CONTROL
+
+        for attempt in range(3):
+            self.date_of_birth_field.click()
+            time.sleep(0.3)
+
+            # Принудительно стереть поле через JS
+            browser.driver.execute_script("arguments[0].value = '';",
+                                          self.date_of_birth_field())
+            time.sleep(0.2)
+
+            # Отправить DELETE на всякий случай
+            self.date_of_birth_field.send_keys(modifier, 'a', Keys.DELETE)
+            time.sleep(0.2)
+
+            # Ввести дату
+            self.date_of_birth_field.type(expected_value).press_enter()
+            time.sleep(0.5)
+
+            # Проверка
+            try:
+                self.date_of_birth_field.should(have.value(expected_value))
+                return
+            except AssertionError:
+                if attempt == 2:
+                    raise AssertionError(
+                        f"Дата не установлена как '{expected_value}'")
+                time.sleep(0.5)
 
     def fill_subjects(self, value):
-        browser.element('#subjectsInput').type(value).press_tab()
+        browser.element('#subjectsInput').type(value).press_enter()
 
     def fill_hobbies(self, value1, value2):
         self.all_hobbies_field.element_by(have.exact_text(value1)).click()
