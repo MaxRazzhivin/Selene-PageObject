@@ -71,3 +71,90 @@ def test_complete_do():
 - запуск через pytest tests/test_page_object.py
 - посмотреть отчет через allure serve allure-results
 ```
+
+## Добавление CI Github Actions 
+
+```bash
+1) Создаем в корне проекта папку .github -> в ней папку workflows
+2) Создаем файлик test.yaml внутри workflows
+3) Контент для .yaml файла - просто рабочий файл здесь размещу, надеюсь дальше хватит копирования его
+
+name: Test
+
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+    inputs:
+       browser:
+         description: 'Browser to use'
+         required: false
+         default: 'chrome'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install ffmpeg
+        run: sudo apt update && sudo apt install -y ffmpeg
+
+      - name: Run tests
+        run: pytest --alluredir=allure-results
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v2
+        if: always()
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report action
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Deploy report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+
+4) надо создать отдельную ветку, команды:
+  git checkout --orphan gh-pages
+  rm -rf ./*
+  echo "Allure Reports" > README.md
+  git add .
+  git commit -m "init gh-pages"
+  git push origin gh-pages
+  
+  Затем вернуться на свою ветку 
+  git checkout main
+  
+5)  Включить разрешение на push из Actions
+	1.	Перейди в:
+GitHub → Repository → Settings → Actions → General
+	2.	Найди блок:
+Workflow permissions
+	3.	Выбери:
+✅ Read and write permissions
+(по умолчанию стоит “Read-only”)
+	4.	Нажми Save
+ 
+
+```
