@@ -1,3 +1,6 @@
+import platform
+import tempfile
+
 import pytest
 
 from selenium import webdriver
@@ -15,12 +18,18 @@ def browser_management():
     browser.config.window_width = os.getenv('window_width', 1169)
     browser.config.base_url = os.getenv('base_url', 'https://demoqa.com')
     browser.config.timeout = float(os.getenv('timeout', '4'))
+
     driver_options = webdriver.ChromeOptions()
+
+    driver_options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
     browser.config.driver_options = driver_options
 
 
     # Функция для начала записи видео
     def start_recording():
+        if platform.system() != 'Darwin':
+            print("⚠️ ffmpeg-запись отключена: не macOS")
+            return None
         command = [
             'ffmpeg',
             '-y',  # перезаписать файл без подтверждения
@@ -46,7 +55,8 @@ def browser_management():
 
     # Функция для остановки записи видео
     def stop_recording(process):
-        process.terminate()  # Остановить процесс ffmpeg
+        if process:
+            process.terminate()  # Остановить процесс ffmpeg
 
     # Остановка записи
     stop_recording(video_process)
