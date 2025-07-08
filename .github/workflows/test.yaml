@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - "main"
+  workflow_dispatch:
+    inputs:
+       browser:
+         description: 'Browser to use'
+         required: false
+         default: 'chrome'
 
 jobs:
   test:
