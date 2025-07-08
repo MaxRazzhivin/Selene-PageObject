@@ -1,9 +1,12 @@
 import pytest
+
 from selenium import webdriver
 import subprocess
 import time
 from selene import browser
 import os
+
+from utils import attach
 
 
 @pytest.fixture(scope='function', autouse=True)
@@ -23,7 +26,7 @@ def browser_management():
             '-y',  # перезаписать файл без подтверждения
             '-f', 'avfoundation',  # захват экрана
             '-s', '1920x1440',  # размер экрана
-            '-i', '5',  # входной сигнал (дисплей) / 3 - без внешнего экрана
+            '-i', '3',  # входной сигнал (дисплей) / 3 - без внешнего экрана
             # 5 или 6 с внешним экраном
             # команда для получения номеров кодеков - ffmpeg -f avfoundation -list_devices true -i ""
             '-c:v', 'libx264',  # кодек
@@ -45,5 +48,10 @@ def browser_management():
 
     # Остановка записи
     stop_recording(video_process)
+
+    attach.add_screenshot(browser)
+    attach.add_logs(browser)
+    attach.add_html(browser)
+    attach.add_video()
 
     browser.quit()

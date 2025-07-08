@@ -1,6 +1,15 @@
+import allure
+from allure_commons.types import Severity
 from pages.registration_page import RegistrationPage
 
 
+@allure.tag("web")
+@allure.title("Успешная регистрация студента с полными данными")
+@allure.label("owner", "Max Razzhivin")
+@allure.feature("Форма для заполнения студентом своих данных")
+@allure.story("Форма корректно заполняется и результаты корректные")
+@allure.link("https://demoqa.com/automation-practice-form", "Test")
+@allure.severity(Severity.CRITICAL)
 def test_complete_do():
     # GIVEN:
     registration_page = RegistrationPage()
