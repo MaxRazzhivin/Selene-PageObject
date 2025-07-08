@@ -31,7 +31,9 @@ def browser_management():
             # команда для получения номеров кодеков - ffmpeg -f avfoundation -list_devices true -i ""
             '-c:v', 'libx264',  # кодек
             '-preset', 'ultrafast',  # скорость кодирования
-            'output.mp4'  # имя выходного файла
+            os.path.abspath(
+            os.path.join(os.path.dirname(__file__),
+                         '../resources/output.mp4'))
         ]
         return subprocess.Popen(command)
 
