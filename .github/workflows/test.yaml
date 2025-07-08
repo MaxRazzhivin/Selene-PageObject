@@ -7,12 +7,9 @@ on:
 
 jobs:
   test:
-    name: Run tests and publish Allure report
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -20,24 +17,22 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Install ffmpeg
         run: sudo apt update && sudo apt install -y ffmpeg
 
-      - name: Run tests with Allure
+      - name: Run tests
         run: pytest --alluredir=allure-results
 
-      - name: Get Allure history
+      - name: Checkout gh-pages
         uses: actions/checkout@v2
         if: always()
-        continue-on-error: true
         with:
           ref: gh-pages
-          path: allure-history  # 👈 Папка должна называться именно так
+          path: gh-pages
 
-      - name: Generate Allure report
+      - name: Allure Report action
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
@@ -45,12 +40,10 @@ jobs:
           allure_history: allure-history
           keep_reports: 20
 
-      - name: Deploy report to Github Pages
-        uses: peaceiris/actions-gh-pages@v2
+      - name: Deploy report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
         with:
-          publish_dir: allure-history
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          # эти можно добавить опционально:
-          # commit_message: "deploy: Allure report"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-history
