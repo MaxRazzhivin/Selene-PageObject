@@ -66,24 +66,10 @@ def browser_management():
     # Остановка записи
     stop_recording(video_process)
 
-    try:
-        attach.add_screenshot(browser)
-    except Exception as e:
-        print(f"[Allure attach] Screenshot failed: {e}")
 
-    try:
-        attach.add_logs(browser)
-    except Exception as e:
-        print(f"[Allure attach] Logs failed: {e}")
-
-    try:
-        attach.add_html(browser)
-    except Exception as e:
-        print(f"[Allure attach] HTML failed: {e}")
-
-    try:
-        attach.add_video()
-    except Exception as e:
-        print(f"[Allure attach] Video failed: {e}")
+    attach.add_screenshot(browser)
+    attach.add_logs(browser)
+    attach.add_html(browser)
+    attach.add_video()
 
     browser.quit()
