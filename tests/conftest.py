@@ -21,7 +21,12 @@ def browser_management():
 
     driver_options = webdriver.ChromeOptions()
 
-    driver_options.add_argument(f'--user-data-dir={tempfile.mkdtemp()}')
+    if os.getenv('CI'):
+        driver_options.add_argument(
+            '--headless=new')  # обязательно 'new' для последних версий Chrome
+        driver_options.add_argument('--no-sandbox')
+        driver_options.add_argument('--disable-dev-shm-usage')
+
     browser.config.driver_options = driver_options
 
 
