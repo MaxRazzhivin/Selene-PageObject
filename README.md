@@ -64,3 +64,10 @@ def test_complete_do():
 
     registration_page.fill_user_number('9094618666')
 ```
+
+## Добавил в тест аллюр разметку с отчетами и файлами
+
+```bash
+- запуск через pytest tests/test_page_object.py
+- посмотреть отчет через allure serve allure-results
+```
