@@ -1,20 +1,24 @@
-
 name: Test
 
 on:
   push:
     branches:
       - "main"
+
 jobs:
   test:
-    name: Test
+    name: Run tests and publish Allure report
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.x
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
@@ -22,9 +26,8 @@ jobs:
       - name: Install ffmpeg
         run: sudo apt update && sudo apt install -y ffmpeg
 
-      - name: Install dependencies
-        run: |
-          pytest --alluredir=allure-results
+      - name: Run tests with Allure
+        run: pytest --alluredir=allure-results
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -32,18 +35,20 @@ jobs:
         continue-on-error: true
         with:
           ref: gh-pages
-          path: gh-pages
-      - name: Allure Report action from marketplace
+          path: allure-history  # 👈 Папка должна называться именно так
+
+      - name: Generate Allure report
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
           allure_results: allure-results
           allure_history: allure-history
           keep_reports: 20
-      - name: Deploy report to Github Pages
+
+      - name: Deploy report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-history
+          publish_branch: gh-pages
