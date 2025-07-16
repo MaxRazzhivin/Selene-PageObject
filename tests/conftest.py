@@ -32,7 +32,7 @@ def browser_management():
         # Указание пути к ChromeDriver вручную
         chrome_service = Service(executable_path='/usr/local/bin/chromedriver')
         browser.config.driver = webdriver.Chrome(service=chrome_service,
-                                                 options=options)
+                                                 options=driver_options)
 
     browser.config.driver_options = driver_options
 

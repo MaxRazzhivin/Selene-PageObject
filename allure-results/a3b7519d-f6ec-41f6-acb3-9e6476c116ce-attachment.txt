@@ -9,11 +9,11 @@ ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers
   libswscale      8.  3.100 /  8.  3.100
   libswresample   5.  3.100 /  5.  3.100
   libpostproc    58.  3.100 / 58.  3.100
-2025-07-16 20:04:00.800 ffmpeg[26654:1326380] WARNING: Add NSCameraUseContinuityCameraDeviceType to your Info.plist to use AVCaptureDeviceTypeContinuityCamera.
-2025-07-16 20:04:00.967 ffmpeg[26654:1326380] WARNING: AVCaptureDeviceTypeExternal is deprecated for Continuity Cameras. Please use AVCaptureDeviceTypeContinuityCamera and add NSCameraUseContinuityCameraDeviceType to your Info.plist.
-[avfoundation @ 0x13d704a90] Selected framerate (29.970030) is not supported by the device.
-[avfoundation @ 0x13d704a90] Supported modes:
-[avfoundation @ 0x13d704a90]   1920x1440@[15.000000 30.000000]fps
-[in#0 @ 0x600003be4200] Error opening input: Input/output error
+2025-07-16 20:10:36.576 ffmpeg[27125:1335312] WARNING: Add NSCameraUseContinuityCameraDeviceType to your Info.plist to use AVCaptureDeviceTypeContinuityCamera.
+2025-07-16 20:10:36.754 ffmpeg[27125:1335312] WARNING: AVCaptureDeviceTypeExternal is deprecated for Continuity Cameras. Please use AVCaptureDeviceTypeContinuityCamera and add NSCameraUseContinuityCameraDeviceType to your Info.plist.
+[avfoundation @ 0x152804080] Selected framerate (29.970030) is not supported by the device.
+[avfoundation @ 0x152804080] Supported modes:
+[avfoundation @ 0x152804080]   1920x1440@[15.000000 30.000000]fps
+[in#0 @ 0x600001520000] Error opening input: Input/output error
 Error opening input file 3.
 Error opening input files: Input/output error
