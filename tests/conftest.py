@@ -30,9 +30,9 @@ def browser_management():
         driver_options.add_argument('--disable-dev-shm-usage')
 
         # Указание пути к ChromeDriver вручную
-        chrome_service = Service(executable_path='/usr/local/bin/chromedriver')
-        browser.config.driver = webdriver.Chrome(service=chrome_service,
-                                                 options=driver_options)
+        service = Service(executable_path='/usr/local/bin/chromedriver')
+        browser.config.driver = webdriver.Chrome(service=service,
+                                                 options=options)
 
     browser.config.driver_options = driver_options
 
