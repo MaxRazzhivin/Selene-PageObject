@@ -146,7 +146,7 @@ jobs:
   Затем вернуться на свою ветку 
   git checkout main
   
-5)  Включить разрешение на push из Actions
+5) Включить разрешение на push из Actions
 	1.	Перейди в:
 GitHub → Repository → Settings → Actions → General
 	2.	Найди блок:
