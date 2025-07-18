@@ -29,8 +29,6 @@ def browser_management():
         driver_options.add_argument('--no-sandbox')
         driver_options.add_argument('--disable-dev-shm-usage')
 
-        # Указание пути к ChromeDriver вручную
-        # service = Service(executable_path='/usr/local/bin/chromedriver')
         browser.config.driver = webdriver.Chrome(options=driver_options)
 
     browser.config.driver_options = driver_options

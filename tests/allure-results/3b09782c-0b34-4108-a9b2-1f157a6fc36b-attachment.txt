@@ -1,8 +1,0 @@
-{'level': 'SEVERE', 'message': 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5889298451609146 - Failed to load resource: net::ERR_CONNECTION_RESET', 'source': 'network', 'timestamp': 1752867705779}
-{'level': 'SEVERE', 'message': 'https://www.googletagservices.com/tag/js/gpt.js - Failed to load resource: net::ERR_CONNECTION_RESET', 'source': 'network', 'timestamp': 1752867705790}
-{'level': 'SEVERE', 'message': 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js - Failed to load resource: net::ERR_CONNECTION_RESET', 'source': 'network', 'timestamp': 1752867705793}
-{'level': 'SEVERE', 'message': 'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit - Failed to load resource: net::ERR_CONNECTION_RESET', 'source': 'network', 'timestamp': 1752867705794}
-{'level': 'SEVERE', 'message': 'https://www.googletagmanager.com/gtm.js?id=GTM-MX8DD4S - Failed to load resource: net::ERR_CONNECTION_RESET', 'source': 'network', 'timestamp': 1752867705794}
-{'level': 'SEVERE', 'message': 'https://demoqa.com/images/Toolsqa.jpg - Failed to load resource: net::ERR_CONNECTION_RESET', 'source': 'network', 'timestamp': 1752867705944}
-{'level': 'SEVERE', 'message': 'https://cdn.ad.plus/player/adplus.js - Failed to load resource: net::ERR_CONNECTION_RESET', 'source': 'network', 'timestamp': 1752867705944}
-{'level': 'SEVERE', 'message': 'https://demoqa.com/images/zero-step.jpeg - Failed to load resource: net::ERR_CONNECTION_RESET', 'source': 'network', 'timestamp': 1752867705946}
