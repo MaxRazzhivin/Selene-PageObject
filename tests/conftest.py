@@ -8,9 +8,6 @@ import time
 from selene import browser
 import os
 
-from selenium.webdriver.chrome import options
-from selenium.webdriver.chrome.service import Service
-
 from utils import attach
 
 
