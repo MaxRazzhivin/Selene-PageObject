@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","28833","Успешная регистрация студента с полными данными","tests","Mon Jul 21 11:14:53 GMT 2025","passed","Mon Jul 21 11:15:22 GMT 2025","","test_page_object","",""
