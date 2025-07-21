@@ -283,4 +283,28 @@ config = Config()
     browser.config.driver_name = config.driver_name
     browser.config.hold_driver_at_exit = config.hold_driver_at_exit
     ) 
+      
+      
+      
+В дальнейшем для конфига этого принято создавать файлик отдельный config.py и в него выносить: 
+
+
+```
+
+```bash
+Env-файлы для установки настроек заранее через файл, а не консоль
+
+1) Устанавливаем пакет python-dotenv
+
+2) Создаем в корне проекта файл .env 
+Переменные среды будут созданы из этого файла
+
+3) В conftest дописываем import dotenv 
+
+4) внутри функции-фикстуры дописываем 
+
+dotenv.load_dotenv()
+
+
+
 ```

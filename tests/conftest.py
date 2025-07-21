@@ -1,7 +1,7 @@
 import platform
 import tempfile
 
-import pydantic_settings
+import dotenv
 
 import pytest
 
@@ -11,28 +11,21 @@ import time
 from selene import browser
 import os
 
+import config
+from config import config
+
 from utils import attach
 
-class Config(pydantic_settings.BaseSettings):
-    base_url: str = 'https://demoqa.com'
-    driver_name: str = 'chrome'
-    hold_driver_at_exit: bool = False
-    window_width: int = 1169
-    window_height: int = 1800
-    timeout: float = 4.0
-
-config = Config()
 
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
+    dotenv.load_dotenv()
     browser.config.window_height = config.window_height
     browser.config.window_width = config.window_width
     browser.config.base_url = config.base_url
     browser.config.timeout = config.timeout
     browser.config.driver_name = config.driver_name
     browser.config.hold_driver_at_exit = config.hold_driver_at_exit
-
-    driver_options = webdriver.ChromeOptions()
 
     if os.getenv('CI'):
         if config.driver_name == 'chrome':
@@ -41,12 +34,12 @@ def browser_management():
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
-            browser.config.driver_options = options
+            config.config.driver_options = options
 
         elif config.driver_name == 'firefox':
             options = webdriver.FirefoxOptions()
             options.add_argument('--headless')
-            browser.config.driver_options = options
+            config.config.driver_options = options
 
 
     # Функция для начала записи видео
