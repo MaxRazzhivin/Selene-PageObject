@@ -206,3 +206,79 @@ user = User(name="Bob", age="тридцать", email="bob@example.com")
 # ValidationError: value is not a valid integer
 ```
 
+```bash
+Установка pydantic
+
+pip install pydantic
+либо 
+from pydantic import BaseModel
+
+pip install pydantic-settings
+либо 
+from pydantic_settings import BaseSettings
+
+```
+
+```bash
+Добавляем в requirements.txt 
+
+pydantic>=2.0
+```
+
+```bash
+Проверить версию pydantic можно через 
+
+print(pydantic.__version__)
+```
+
+```bash
+Установка pydantic через poetry
+
+poetry add pydantic
+```
+
+```bash
+Что изменяет для нас в жизни pydantic: 
+
+Было в файле conftest ряд опций, которые передавали через переменные среды,
+т.е. могли при запуске теста указать кастомно какой-то из них в консоли:
+
+    browser.config.window_height = os.getenv('window_height', 1800)
+    browser.config.window_width = os.getenv('window_width', 1169)
+    browser.config.base_url = os.getenv('base_url', 'https://demoqa.com')
+    browser.config.timeout = float(os.getenv('timeout', '4'))
+    browser.config.driver_name = os.getenv('driver_name', 'chrome')
+    browser.config.hold_driver_at_exit = (
+      os.getenv('hold_driver_at_exit', false).lower() == 'true'
+    ) 
+
+Теперь в начале пишем: 
+
+import pydantic
+import pydantic_settings
+
+Далее определяем класс для собственных опций, например Config
+
+class Config(pydantic_settings.BaseSettings):
+    base_url: str = 'https://demoqa.com'
+    driver_name: str = 'chrome'
+    hold_driver_at_exit: bool = False
+    window_width: int = 1169
+    window_height: int = 1800
+    timeout: float = 4.0
+    
+    
+Создаем объект этого класса: 
+
+config = Config()
+
+И можно сделать рефакторинг настроек в conftest:
+
+    browser.config.window_height = config.window_height
+    browser.config.window_width = config.window_width
+    browser.config.base_url = config.base_url
+    browser.config.timeout = config.timeout
+    browser.config.driver_name = config.driver_name
+    browser.config.hold_driver_at_exit = config.hold_driver_at_exit
+    ) 
+```

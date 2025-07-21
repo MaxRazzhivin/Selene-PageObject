@@ -1,5 +1,8 @@
 import platform
 
+import pydantic
+import pydantic_settings
+
 import pytest
 
 from selenium import webdriver
@@ -10,13 +13,22 @@ import os
 
 from utils import attach
 
+class Config(pydantic_settings.BaseSettings):
+    base_url: str = 'https://demoqa.com'
+    driver_name: str = 'chrome'
+    hold_driver_at_exit: bool = False
+    window_width: int = 1169
+    window_height: int = 1800
+    timeout: float = 4.0
+
+config = Config()
 
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
-    browser.config.window_height = os.getenv('window_height', 1800)
-    browser.config.window_width = os.getenv('window_width', 1169)
-    browser.config.base_url = os.getenv('base_url', 'https://demoqa.com')
-    browser.config.timeout = float(os.getenv('timeout', '4'))
+    browser.config.window_height = config.window_height
+    browser.config.window_width = config.window_width
+    browser.config.base_url = config.base_url
+    browser.config.timeout = config.timeout
 
     driver_options = webdriver.ChromeOptions()
 
