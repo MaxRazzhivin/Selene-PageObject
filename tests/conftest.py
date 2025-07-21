@@ -11,8 +11,7 @@ import time
 from selene import browser
 import os
 
-import config
-from config import config
+from config import Config
 
 from utils import attach
 
@@ -20,6 +19,7 @@ from utils import attach
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
     dotenv.load_dotenv()
+    config = Config()
     browser.config.window_height = config.window_height
     browser.config.window_width = config.window_width
     browser.config.base_url = config.base_url
@@ -34,12 +34,12 @@ def browser_management():
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
-            config.config.driver_options = options
+            browser.config.driver_options = options
 
         elif config.driver_name == 'firefox':
             options = webdriver.FirefoxOptions()
             options.add_argument('--headless')
-            config.config.driver_options = options
+            browser.config.driver_options = options
 
 
     # Функция для начала записи видео

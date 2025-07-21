@@ -288,6 +288,34 @@ config = Config()
       
 В дальнейшем для конфига этого принято создавать файлик отдельный config.py и в него выносить: 
 
+Класс Config и объект его
+
+import pydantic_settings
+
+
+class Config(pydantic_settings.BaseSettings):
+    base_url: str = 'https://demoqa.com'
+    driver_name: str = 'chrome'
+    hold_driver_at_exit: bool = False
+    window_width: int = 1169
+    window_height: int = 1800
+    timeout: float = 4.0
+
+```
+
+```bash
+Создание экземпляра класса Config переносим в conftest после строки dotenv.load_dotenv()
+Так сначала будут считываться данные из .env файла, затем если их там нет, будет создаваться экземпляр класса Config
+и браться из него 
+
+from config import Config
+
+@pytest.fixture(scope='function', autouse=True)
+def browser_management():
+    dotenv.load_dotenv()
+    config = Config()
+    browser.config.window_height = config.window_height
+    browser.config.window_width = config.window_width
 
 ```
 

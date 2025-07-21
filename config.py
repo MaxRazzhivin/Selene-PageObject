@@ -8,6 +8,3 @@ class Config(pydantic_settings.BaseSettings):
     window_width: int = 1169
     window_height: int = 1800
     timeout: float = 4.0
-
-
-config = Config()
