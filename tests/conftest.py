@@ -48,8 +48,6 @@ def browser_management():
             options.add_argument('--headless')
             browser.config.driver_options = options
 
-    browser.config.driver_options = driver_options
-
 
     # Функция для начала записи видео
     def start_recording():
