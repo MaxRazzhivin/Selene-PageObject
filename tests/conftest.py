@@ -1,6 +1,5 @@
 import platform
 
-import pydantic
 import pydantic_settings
 
 import pytest
@@ -29,16 +28,23 @@ def browser_management():
     browser.config.window_width = config.window_width
     browser.config.base_url = config.base_url
     browser.config.timeout = config.timeout
+    browser.config.driver_name = config.driver_name
+    browser.config.hold_driver_at_exit = config.hold_driver_at_exit
 
     driver_options = webdriver.ChromeOptions()
 
     if os.getenv('CI'):
-        driver_options.add_argument(
-            '--headless=new')  # обязательно 'new' для последних версий Chrome
-        driver_options.add_argument('--no-sandbox')
-        driver_options.add_argument('--disable-dev-shm-usage')
+        if config.driver_name == 'chrome':
+            options = webdriver.ChromeOptions()
+            options.add_argument('--headless=new')
+            options.add_argument('--no-sandbox')
+            options.add_argument('--disable-dev-shm-usage')
+            browser.config.driver_options = options
 
-        browser.config.driver = webdriver.Chrome(options=driver_options)
+        elif config.driver_name == 'firefox':
+            options = webdriver.FirefoxOptions()
+            options.add_argument('--headless')
+            browser.config.driver_options = options
 
     browser.config.driver_options = driver_options
 
@@ -53,7 +59,7 @@ def browser_management():
             '-y',  # перезаписать файл без подтверждения
             '-f', 'avfoundation',  # захват экрана
             '-s', '1920x1440',  # размер экрана
-            '-i', '3',  # входной сигнал (дисплей) / 3 - без внешнего экрана
+            '-i', '5',  # входной сигнал (дисплей) / 3 - без внешнего экрана
             # 5 или 6 с внешним экраном
             # команда для получения номеров кодеков - ffmpeg -f avfoundation -list_devices true -i ""
             '-c:v', 'libx264',  # кодек

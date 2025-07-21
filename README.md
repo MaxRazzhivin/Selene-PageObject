@@ -243,6 +243,8 @@ poetry add pydantic
 Было в файле conftest ряд опций, которые передавали через переменные среды,
 т.е. могли при запуске теста указать кастомно какой-то из них в консоли:
 
+env -S "driver_name=firefox timeout=4.0" pytest tests
+
     browser.config.window_height = os.getenv('window_height', 1800)
     browser.config.window_width = os.getenv('window_width', 1169)
     browser.config.base_url = os.getenv('base_url', 'https://demoqa.com')
