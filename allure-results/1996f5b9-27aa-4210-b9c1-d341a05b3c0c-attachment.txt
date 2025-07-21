@@ -1,55 +1,0 @@
-ffmpeg version 7.1.1 Copyright (c) 2000-2025 the FFmpeg developers
-  built with Apple clang version 17.0.0 (clang-1700.0.13.3)
-  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/7.1.1_3 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags='-Wl,-ld_classic' --enable-ffplay --enable-gnutls --enable-gpl --enable-libaom --enable-libaribb24 --enable-libbluray --enable-libdav1d --enable-libharfbuzz --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librav1e --enable-librist --enable-librubberband --enable-libsnappy --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtesseract --enable-libtheora --enable-libvidstab --enable-libvmaf --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libxvid --enable-lzma --enable-libfontconfig --enable-libfreetype --enable-frei0r --enable-libass --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libspeex --enable-libsoxr --enable-libzmq --enable-libzimg --disable-libjack --disable-indev=jack --enable-videotoolbox --enable-audiotoolbox --enable-neon
-  libavutil      59. 39.100 / 59. 39.100
-  libavcodec     61. 19.101 / 61. 19.101
-  libavformat    61.  7.100 / 61.  7.100
-  libavdevice    61.  3.100 / 61.  3.100
-  libavfilter    10.  4.100 / 10.  4.100
-  libswscale      8.  3.100 /  8.  3.100
-  libswresample   5.  3.100 /  5.  3.100
-  libpostproc    58.  3.100 / 58.  3.100
-2025-07-21 12:51:15.791 ffmpeg[21738:257912] WARNING: Add NSCameraUseContinuityCameraDeviceType to your Info.plist to use AVCaptureDeviceTypeContinuityCamera.
-2025-07-21 12:51:15.924 ffmpeg[21738:257912] WARNING: AVCaptureDeviceTypeExternal is deprecated for Continuity Cameras. Please use AVCaptureDeviceTypeContinuityCamera and add NSCameraUseContinuityCameraDeviceType to your Info.plist.
-objc[21738]: class `NSKVONotifying_AVCaptureScreenInput' not linked into application
-objc[21738]: class `NSKVONotifying_AVCaptureScreenInput' not linked into application
-objc[21738]: class `NSKVONotifying_AVCaptureScreenInput' not linked into application
-[AVFoundation indev @ 0x152f04cc0] Configuration of video device failed, falling back to default.
-[avfoundation @ 0x152f04a50] Selected pixel format (yuv420p) is not supported by the input device.
-[avfoundation @ 0x152f04a50] Supported pixel formats:
-[avfoundation @ 0x152f04a50]   uyvy422
-[avfoundation @ 0x152f04a50]   yuyv422
-[avfoundation @ 0x152f04a50]   nv12
-[avfoundation @ 0x152f04a50]   0rgb
-[avfoundation @ 0x152f04a50]   bgr0
-[avfoundation @ 0x152f04a50] Overriding selected pixel format to use uyvy422 instead.
-[avfoundation @ 0x152f04a50] Stream #0: not enough frames to estimate rate; consider increasing probesize
-Input #0, avfoundation, from '5':
-  Duration: N/A, start: 19863.919000, bitrate: N/A
-  Stream #0:0: Video: rawvideo (UYVY / 0x59565955), uyvy422, 5120x2880, 1000k tbr, 1000k tbn
-Stream mapping:
-  Stream #0:0 -> #0:0 (rawvideo (native) -> h264 (libx264))
-Press [q] to stop, [?] for help
-[libx264 @ 0x152f5f940] MB rate (57600000000) > level limit (16711680)
-[libx264 @ 0x152f5f940] using cpu capabilities: ARMv8 NEON
-[libx264 @ 0x152f5f940] profile High 4:2:2, level 6.2, 4:2:2, 8-bit
-[libx264 @ 0x152f5f940] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=0 ref=1 deblock=0:0:0 analyse=0:0 me=dia subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=15 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=0 weightp=0 keyint=250 keyint_min=25 scenecut=0 intra_refresh=0 rc=crf mbtree=0 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=0
-Output #0, mp4, to '/Users/maxnovo/Desktop/qa.guru/18.08 Page_Object/resources/output.mp4':
-  Metadata:
-    encoder         : Lavf61.7.100
-  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv422p(tv, progressive), 5120x2880, q=2-31, 1000k fps, 1000k tbn
-      Metadata:
-        encoder         : Lavc61.19.101 libx264
-      Side data:
-        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
-frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=   15 fps= 15 q=13.0 size=    1536KiB time=00:00:00.46 bitrate=26964.1kbits/s speed=0.462x    frame=   30 fps= 20 q=13.0 size=    1536KiB time=00:00:00.96 bitrate=13017.2kbits/s speed=0.638x    frame=   45 fps= 22 q=13.0 size=    1536KiB time=00:00:01.46 bitrate=8579.5kbits/s speed=0.726x    frame=   60 fps= 24 q=14.0 size=    1536KiB time=00:00:01.96 bitrate=6398.3kbits/s speed=0.779x    frame=   75 fps= 25 q=13.0 size=    1536KiB time=00:00:02.46 bitrate=5101.3kbits/s speed=0.815x    frame=   91 fps= 26 q=13.0 size=    2048KiB time=00:00:03.00 bitrate=5592.5kbits/s speed=0.849x    frame=  106 fps= 26 q=13.0 size=    2048KiB time=00:00:03.50 bitrate=4793.6kbits/s speed=0.867x    frame=  120 fps= 26 q=13.0 size=    2048KiB time=00:00:03.96 bitrate=4229.6kbits/s speed=0.873x    frame=  136 fps= 27 q=13.0 size=    2048KiB time=00:00:04.50 bitrate=3728.4kbits/s speed=0.891x    frame=  151 fps= 27 q=13.0 size=    2048KiB time=00:00:05.00 bitrate=3355.5kbits/s speed= 0.9x    frame=  166 fps= 27 q=13.0 size=    2048KiB time=00:00:05.50 bitrate=3050.5kbits/s speed=0.908x    frame=  181 fps= 28 q=13.0 size=    2048KiB time=00:00:06.00 bitrate=2796.3kbits/s speed=0.914x    frame=  197 fps= 28 q=13.0 size=    2048KiB time=00:00:06.53 bitrate=2568.0kbits/s speed=0.924x    frame=  212 fps= 28 q=13.0 size=    2304KiB time=00:00:07.03 bitrate=2683.6kbits/s speed=0.928x    frame=  227 fps= 28 q=13.0 size=    2304KiB time=00:00:07.53 bitrate=2505.5kbits/s speed=0.932x    frame=  242 fps= 28 q=15.0 size=    2304KiB time=00:00:08.03 bitrate=2349.6kbits/s speed=0.936x    frame=  257 fps= 28 q=13.0 size=    4096KiB time=00:00:08.53 bitrate=3932.2kbits/s speed=0.939x    frame=  272 fps= 28 q=13.0 size=    4096KiB time=00:00:09.03 bitrate=3714.6kbits/s speed=0.942x    frame=  287 fps= 28 q=15.0 size=    4096KiB time=00:00:09.53 bitrate=3519.7kbits/s speed=0.944x    frame=  302 fps= 28 q=13.0 size=    4096KiB time=00:00:10.03 bitrate=3344.3kbits/s speed=0.946x    frame=  317 fps= 29 q=13.0 size=    4096KiB time=00:00:10.53 bitrate=3185.6kbits/s speed=0.949x    frame=  332 fps= 29 q=14.0 size=    4352KiB time=00:00:11.03 bitrate=3231.3kbits/s speed=0.951x    frame=  347 fps= 29 q=14.0 size=    4608KiB time=00:00:11.53 bitrate=3273.0kbits/s speed=0.953x    frame=  360 fps= 29 q=14.0 size=    4864KiB time=00:00:11.96 bitrate=3329.8kbits/s speed=0.949x    frame=  371 fps= 28 q=17.0 size=    4864KiB time=00:00:12.33 bitrate=3230.8kbits/s speed=0.941x    frame=  386 fps= 28 q=13.0 size=    5376KiB time=00:00:13.06 bitrate=3370.5kbits/s speed=0.96x    frame=  401 fps= 28 q=13.0 size=    5376KiB time=00:00:13.56 bitrate=3246.2kbits/s speed=0.961x    frame=  413 fps= 28 q=16.0 size=    5376KiB time=00:00:14.00 bitrate=3145.8kbits/s speed=0.957x    frame=  426 fps= 28 q=14.0 size=    5632KiB time=00:00:14.40 bitrate=3204.0kbits/s speed=0.951x    frame=  441 fps= 28 q=13.0 size=    6144KiB time=00:00:15.06 bitrate=3340.6kbits/s speed=0.964x    frame=  456 fps= 28 q=13.0 size=    6144KiB time=00:00:15.56 bitrate=3233.3kbits/s speed=0.965x    frame=  471 fps= 28 q=14.0 size=    6144KiB time=00:00:16.06 bitrate=3132.7kbits/s speed=0.966x    frame=  486 fps= 28 q=13.0 size=    6656KiB time=00:00:16.56 bitrate=3291.3kbits/s speed=0.967x    frame=  501 fps= 28 q=13.0 size=    6656KiB time=00:00:17.06 bitrate=3194.9kbits/s speed=0.967x    frame=  516 fps= 28 q=14.0 size=    7936KiB time=00:00:17.56 bitrate=3700.9kbits/s speed=0.968x    frame=  532 fps= 29 q=14.0 size=    7936KiB time=00:00:18.10 bitrate=3591.8kbits/s speed=0.97x    [out#0/mp4 @ 0x600000928a80] video:8631KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.069695%
-frame=  554 fps= 29 q=-1.0 Lsize=    8637KiB time=00:00:18.83 bitrate=3757.1kbits/s speed=0.994x    
-[libx264 @ 0x152f5f940] frame I:3     Avg QP:13.67  size:1290540
-[libx264 @ 0x152f5f940] frame P:551   Avg QP:13.66  size:  9013
-[libx264 @ 0x152f5f940] mb I  I16..4: 100.0%  0.0%  0.0%
-[libx264 @ 0x152f5f940] mb P  I16..4:  1.0%  0.0%  0.0%  P16..4:  0.6%  0.0%  0.0%  0.0%  0.0%    skip:98.4%
-[libx264 @ 0x152f5f940] coded y,uvDC,uvAC intra: 17.2% 19.0% 12.3% inter: 0.2% 0.3% 0.1%
-[libx264 @ 0x152f5f940] i16 v,h,dc,p: 77% 18%  3%  3%
-[libx264 @ 0x152f5f940] i8c dc,h,v,p: 69% 11% 18%  2%
-[libx264 @ 0x152f5f940] kb/s:3747.55
-Exiting normally, received signal 15.
